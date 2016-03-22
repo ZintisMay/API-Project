@@ -28,25 +28,13 @@ $("#functionButton").click(function() {
 	$("#syntaxBox").val(null)
 	$("#descriptionBox").val(null)
 
-	// Creates the url that will be used for the YouTube API call. 
-	var queryURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=" + functionName + "&key=AIzaSyDhXnzU5IOira_ZSXqhw1wI84bHucG7YNI";
-
-	// The API call for YouTube.
-	$.ajax({url: queryURL, method: 'GET'}).done(function(data) {
-
-		// Saves the video ID of the first result into a variable.
-		var videoID = data.items[0].id.videoId;
-
-		// Pushes all of the saved variables into the Firebase. 
-		tableData.push ({
+	// Pushes all of the saved variables into the Firebase. 
+	tableData.push ({
 			functionName: functionName,
 			language: language,
 			syntax: syntax,
 			description: description,
-			date: currentDay,
-			youtubeID: videoID
-		});
-
+			date: currentDay
 	});
 
 });
@@ -76,26 +64,51 @@ tableData.on('child_added', function(childSnapshot, prevChildKey) {
 	// Creates a <td> for the resource links. 
 	var resourceTD = $("<td>")
 
-	// The variable for the YouTube link.
-	var link = $("<a>")
-	link.text("YouTube")
 
-	// This is the code that will make the modal appear when you click the link.
-	link.attr("data-toggle", "modal")
-	link.attr("data-target", ".bs-example-modal-lg")
+	// ------YouTube------
 
-	// Adds a click function for the YouTube link.
-	link.click(function() {
-		// Emptys the modal body.
-		$("#modalbody").empty();
-		// Appends the appropriate video to the modal.
-		$("#modalbody").append('<iframe width="560" height="315" src="http://www.youtube.com/embed/' + childSnapshot.val().youtubeID + '" frameborder="0" allowfullscreen></iframe>');
-		// Changes the title on the modal.
-		$("#myModalLabel").html("Additional Resources - YouTube")
-	})
+		// The variable for the YouTube link.
+		var link = $("<a>")
+		link.text("YouTube")
 
-	// Adds the link to the resources <td>
-	resourceTD.append(link)
+		// This is the code that will make the modal appear when you click the link.
+		link.attr("data-toggle", "modal")
+		link.attr("data-target", ".bs-example-modal-lg")
+
+		// Adds a click function for the YouTube link.
+		link.click(function() {
+			
+			// Emptys the modal body.
+			$("#modalbody").empty();
+			
+			// Changes the title on the modal.
+			$("#myModalLabel").html("Additional Resources - YouTube")
+
+			// Creates the url that will be used for the YouTube API call. 
+			var queryURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&q=" + childSnapshot.val().functionName + "+" + childSnapshot.val().language + "&key=AIzaSyDhXnzU5IOira_ZSXqhw1wI84bHucG7YNI";
+
+			// The API call for YouTube.
+			$.ajax({url: queryURL, method: 'GET'}).done(function(data) {
+
+				// Stuff for testing.
+				console.log("-----YouTube API call-----");
+				console.log(queryURL);
+				console.log(data);
+
+				// Saves the video ID of the first result into a variable.
+				var videoID = data.items[0].id.videoId;
+
+				// Appends the appropriate video to the modal.
+				$("#modalbody").append('<iframe width="560" height="315" src="http://www.youtube.com/embed/' + videoID + '" frameborder="0" allowfullscreen></iframe>');
+
+			});
+
+		})
+
+		// Adds the link to the resources <td>
+		resourceTD.append(link)
+
+	// ------YouTube------
 
 	// ------Reddit------
 
@@ -223,12 +236,18 @@ tableData.on('child_added', function(childSnapshot, prevChildKey) {
 	// $("#theTable").append(tableEntry)
 	$("#tbody").append(tableEntry)
 
+
 // Error handling
 }, function(errorObject){
 
 		console.log("Errors handled: " + errorObject.code);
 
 });
+
+// Emptys the modal when you click one of the close buttons. This stops the YouTube videos from playing! They still play when you click off the modal however..
+$(".stopvideo").click(function() {
+	$("#modalbody").empty();
+})
 
 // This is the code that makes the DataTable work... DEFINITELY not supposed to be using a time out but I have no idea how to make the function run after the data is loaded.
 var lel = function() {
@@ -237,7 +256,4 @@ var lel = function() {
 	});
 }
 
-setTimeout(lel, 500)
-
-
-
+setTimeout(lel, 600)
