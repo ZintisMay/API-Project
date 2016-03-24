@@ -1,3 +1,11 @@
+//zcode work in progress
+var zintisArray = [];
+var color = "";
+//end zcode
+
+
+
+
 // Setting up the Firebase.
 var tableData = new Firebase("https://api-project.firebaseio.com/")
 
@@ -56,6 +64,46 @@ tableData.on('child_added', function(childSnapshot, prevChildKey) {
 
 	// Setting up a variable for the table row.
 	var tableEntry = $("<tr>")
+
+
+//---zcode------------------------------------------------------------------------------------------------
+		
+//zintis - creates two buttons with checkmark and x
+
+		var tableButtonUp = $("<button class='upvote'><span class='glyphicon glyphicon-ok'></span></button>");	
+		
+		var tableButtonDown = $("<button class='downvote'><span class='glyphicon glyphicon-remove'></span></button></div>");
+		
+//assigns data-names for future reference		
+		tableButtonUp.attr("data-name", childSnapshot.key());
+
+		tableButtonDown.attr("data-name", childSnapshot.key());
+
+//makes a td element, and sticks both buttons on it
+		var tableButtons = $("<td>") 
+
+		tableButtons.append(tableButtonUp);
+
+		tableButtons.append(tableButtonDown);
+		
+
+									// console.log("tablebutton");
+									// console.log(childSnapshot.key());
+
+//makes a td element to hold the rating number
+		var ratingTD = $("<td>")
+
+//gets and sticks the firebase rating onto the id of the rating number, for future reference
+		ratingTD.append(childSnapshot.val().rating);
+		ratingTD.attr("id", childSnapshot.key() + "tabledata");
+		ratingTD.attr("data-color", "black");
+
+//the append has been stuck in the append group near the end-------
+// tableEntry.append(ratingTD);
+			
+
+//-zcode----------------------------------------------------------------------------------------------
+
 
 	// Creates a <td> for function/method name and adds it. 
 	var nameTD = $("<td>")
@@ -211,6 +259,11 @@ tableData.on('child_added', function(childSnapshot, prevChildKey) {
 	var dateTD = $("<td>")
 	dateTD.append(childSnapshot.val().date)
 
+	//zintis new appends
+		tableEntry.append(tableButtons)
+		tableEntry.append(ratingTD)
+	//zintis	
+
 	// Adds all of the individual <td>s we created to the <tr>.
 	tableEntry.append(nameTD)
 	tableEntry.append(languageTD)
@@ -241,3 +294,133 @@ setTimeout(lel, 500)
 
 
 
+$(document.body).on('click', '.downvote', function(){
+//gets the key
+	var identifier = $(this).data('name');
+//sets the increment
+	var tick = -1;
+//makes the key into a table location
+	var location = $("#" + identifier + "tabledata");
+
+
+
+//references location, if upvoted already doubles the tick
+	// if (location.data('color') == 'green'){
+	// 	tick = -2; 
+	// 	location.attr('data-color', "red");
+	// 	ratingchange(identifier, tick);
+	// }else if (location.data('color') == 'red'){
+	// 	tick = 0;
+	// 	ratingchange(identifier, tick);
+	// }
+
+
+
+//sets a var so change the color
+	color = "red";
+//checks for the key's presence in the array
+	// if (arraypush(identifier, 1)<0){
+
+	console.log(identifier + tick);
+//changes the rating
+	ratingchange(identifier, tick);
+
+	return false;
+	// }
+
+});
+
+
+
+//zintis upvote button jquery - passes the button's data-name into a var, uses var to run rating change function 
+
+$(document.body).on('click', '.upvote', function() {
+//gets the key
+	var identifier = $(this).data('name');
+//sets the increment
+	var tick = 1;
+//makes the key into a table location
+	var location = $("#" + identifier + "tabledata");
+
+
+
+//references location, if upvoted already doubles the tick
+	// if (location.data('color') == 'red'){
+	// 	tick = 2; 
+	// 	location.attr('data-color', "green");
+	// }else if (location.data('color') == 'green'){
+	// 	tick = 0;
+	// }
+
+
+
+//sets a var so change the color
+	color = "green";
+//checks for the key's presence in the array
+	// if (arraypush(identifier, 0)<0){
+
+		console.log(identifier + tick);
+//changes the rating
+	ratingchange(identifier, tick);
+
+	return false;
+	// }
+	
+});
+
+
+
+
+//zintis firebase updater - when the firebase rating is changed, this empties and updates the <td> rating
+
+tableData.on("child_changed", function(snapshot){
+
+		var identifier = snapshot.key();
+
+		console.log("identifier: " + identifier)
+
+		$("#" + identifier + 'tabledata').empty();
+		$("#" + identifier + 'tabledata').append(snapshot.val().rating);
+		$("#" + identifier + 'tabledata').attr('style', "color:" + color + ";");
+
+
+	}, function (errorObject){
+
+		console.log("The read failed: " + errorObject.code);
+});
+
+
+
+
+//zintis new vote function - this function is passed the key and +1 or -1. it then changes the value in the firebase 
+
+function ratingchange(identifier, x) {
+
+	var ref = new Firebase("https://api-project.firebaseio.com/");
+
+	var usersRef = ref.child(identifier);
+
+	console.log("userref rating" + usersRef.rating);
+
+	var ratingHolder = $('#' + identifier + 'tabledata').html();
+
+	console.log(ratingHolder);
+
+	ratingHolder = parseInt(ratingHolder, 10) + x;
+
+	// console.log(ratingHolder);
+	// console.log(ratingHolder);
+
+	if (ratingHolder <= -3){
+		console.log("null");
+		usersRef.set(null);
+
+	} else {
+
+			usersRef.update({
+			rating:ratingHolder
+		});
+	}
+	
+
+}

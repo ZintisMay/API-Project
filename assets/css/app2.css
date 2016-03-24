@@ -1,14 +1,19 @@
 body{
 
 	background-image: url(../images/blue.jpg);
+	background-size:100%;
+	/*background-repeat: no-repeat;*/
+
 }
 
-
+.next{color:white;}
+.previous{color:white;}
+.dataTables_info{color:white;}
 
 #functiontable{
-	background-color: black;
-	border-style: solid;
-	border-width:1px;
+/*	background-color: black;*/
+/*	border-style: solid;
+	border-width:1px;*/
 }
 h1 {
 	text-align: center;
@@ -31,11 +36,11 @@ border-width: 1px;
 padding-top: 10px;
 }
 .head{
-	color: #0066ff;
+	color: white;
 
 }
 
-table {
+table{
 
 
 
@@ -52,6 +57,7 @@ table {
 	color: white;
 }
 th{
+	color:white;
 	background-color: black;
 	font-size: 20px;
 }
@@ -88,10 +94,15 @@ th{
 
 
 a {
-	color: #0066ff;	
-	text-decoration: underline;
+	color:black;
+/*	color: #0066ff;	
+*/	text-decoration: underline;
 	cursor: pointer;
 }
+a:hover{
+/*color: :white;*/
+}
+
 .odd:hover {
     background-color: #0066ff;
 color: black;
@@ -116,19 +127,21 @@ font-size: 20px;
 }
 
 #theTable_info{
-
-	color: #0066ff
+	color:black;
+	/*color: #0066ff;*/
 }
 
 #theTable_wrapper{
-	background-color: black;
+	/*background-color: black;*/
 }
 label{
-	color: #0066ff;
+	color: white;
 	font-family: 'Poiret One', cursive;
 	font-size: 20px;
 
 }
+select{color:black;}
+input{color:black;}
 #tbody{
 	font-family: 'Poiret One', cursive;
 	font-size: 20px;
@@ -136,6 +149,8 @@ label{
 	color: #0066ff;
 }
 
-
-
+#theTable{
+	background-color: black;
+color: white;
+}
 
