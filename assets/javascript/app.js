@@ -69,7 +69,14 @@ tableData.on('child_added', function(childSnapshot, prevChildKey) {
 
 		// The variable for the YouTube link.
 		var link = $("<a>")
-		link.text("YouTube")
+		// link.text("YouTube")
+
+		// var youtubeIcon = $("<img>")
+		// youtubeIcon.attr("src", )
+
+		var youtubeIcon = $("<i>")
+		youtubeIcon.addClass("fa fa-youtube-square")
+		youtubeIcon.appendTo(link)
 
 		// This is the code that will make the modal appear when you click the link.
 		link.attr("data-toggle", "modal")
@@ -80,6 +87,8 @@ tableData.on('child_added', function(childSnapshot, prevChildKey) {
 			
 			// Emptys the modal body.
 			$("#modalbody").empty();
+
+			$("#modalbody").addClass("text-center");
 			
 			// Changes the title on the modal.
 			$("#myModalLabel").html("Additional Resources - YouTube")
@@ -114,7 +123,11 @@ tableData.on('child_added', function(childSnapshot, prevChildKey) {
 
 		// The varriable for the Reddit Link.
 		var redditLink = $("<a>")
-		redditLink.text("Reddit")
+		// redditLink.text("Reddit")
+
+		var redditIcon = $("<i>")
+		redditIcon.addClass("fa fa-reddit-square")
+		redditIcon.appendTo(redditLink)
 
 		// This is the code that will make the modal appear when you click the link.
 		redditLink.attr("data-toggle", "modal")
@@ -125,6 +138,8 @@ tableData.on('child_added', function(childSnapshot, prevChildKey) {
 
 			// Emptys the modal body.
 			$("#modalbody").empty();
+
+			$("#modalbody").removeClass("text-center");
 
 			// Changes the title on the modal.
 			$("#myModalLabel").html("Additional Resources - Reddit")
@@ -140,14 +155,21 @@ tableData.on('child_added', function(childSnapshot, prevChildKey) {
 				console.log(redditURL);
 				console.log(response);
 		
+				var ol = $("<ol>")
 				// This code makes links out of the first 5 results from Reddit.
 				for ( x = 0; x < 5; x++ ) {
+					
+					var li = $("<li>")
 					var linky = $("<a>")
 					linky.text(response.data[x].title)
 					linky.attr("href", response.data[x].url)
 					linky.attr("target", "_blank")
-					$("#modalbody").append( linky );
-					$("#modalbody").append( "<br>" );
+					linky.addClass("link")
+
+					$(li).append(linky)
+					$(ol).append(li)
+					$("#modalbody").append( ol );
+					// $("#modalbody").append( "<br>" );
 				};
 
 			});
@@ -155,7 +177,7 @@ tableData.on('child_added', function(childSnapshot, prevChildKey) {
 		});
 
 		// Adds the reddit link to the table.
-		resourceTD.append("<br>")
+		// resourceTD.append("<br>")
 		resourceTD.append(redditLink)
 
 	// ------Reddit------
@@ -164,7 +186,11 @@ tableData.on('child_added', function(childSnapshot, prevChildKey) {
 
 		// The varriable for the Stack Overflow Link.
 		var stackLink = $("<a>")
-		stackLink.text("StackOverflow")
+		// stackLink.text("StackOverflow")
+
+		var stackIcon = $("<i>")
+		stackIcon.addClass("fa fa-stack-overflow")
+		stackIcon.appendTo(stackLink)
 
 		// This is the code that will make the modal appear when you click the link.
 		stackLink.attr("data-toggle", "modal")
@@ -175,6 +201,8 @@ tableData.on('child_added', function(childSnapshot, prevChildKey) {
 
 			// Emptys the modal body.
 			$("#modalbody").empty();
+
+			$("#modalbody").removeClass("text-center");
 
 			// Changes the title on the modal.
 			$("#myModalLabel").html("Additional Resources - Stack Overflow")
@@ -200,14 +228,20 @@ tableData.on('child_added', function(childSnapshot, prevChildKey) {
 				console.log(stackURL);
 				console.log(response);
 		
+				var ol = $("<ol>")
 				// This code makes links out of the first 5 results from Stack Overflow.
 				for ( x = 0; x < 5; x++ ) {
+
+					var li = $("<li>")
 					var linky = $("<a>")
 					linky.text(response.items[x].title)
 					linky.attr("href", response.items[x].link)
 					linky.attr("target", "_blank")
-					$("#modalbody").append( linky );
-					$("#modalbody").append( "<br>" );
+
+					$(li).append(linky)
+					$(ol).append(li)
+					$("#modalbody").append( ol );
+					// $("#modalbody").append( "<br>" );
 				}
 
 			});
@@ -215,7 +249,7 @@ tableData.on('child_added', function(childSnapshot, prevChildKey) {
 		});
 
 		// Adds the Stack Overflow link to the table.
-		resourceTD.append("<br>")
+		// resourceTD.append("<br>")
 		resourceTD.append(stackLink)
 
 	// ------Stack Overflow------
@@ -254,6 +288,6 @@ var lel = function() {
 	$(document).ready(function(){
 	    $('#theTable').DataTable();
 	});
-}
+};
 
-setTimeout(lel, 600)
+setTimeout(lel, 700);

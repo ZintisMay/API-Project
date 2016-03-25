@@ -15,16 +15,83 @@
 	cursor:pointer;
 }
 
+.jumbotron h1 {
+		color:#403E2F;
+}
+
+.jumbotron p {
+	font-family: 'Lora', serif;
+	color:#403E2F;
+}
+
 h1 {
-	font-family: 'Averia Serif Libre', cursive;
+	font-family: 'Open Sans Condensed', sans-serif;
+	color:#403E2F;
+	/*font-family: 'Averia Serif Libre', cursive;*/
 	/*font-family: 'Delius Swash Caps', cursive;*/
 	font-size: 70px;
 }
 
 table {
 	font-family: 'Averia Serif Libre', cursive;
+	color:#403E2F
 }
 
 h3 {
+	/*font-family: 'Averia Serif Libre', cursive;*/
+	font-family: 'Open Sans Condensed', sans-serif;
+	font-size:43px;
+	color:#403E2F
+}
+
+.modal {
+	font-size: 18px;
+	font-family: 'Averia Serif Libre', cursive;
+	color:#403E2F
+}
+
+th {
+	font-size: 16px;
+	color:#403E2F
+}
+
+.fa {
+	font-size: 30px;
+	margin-left:5px;
+	color:black;
+	color:#403E2F
+}
+
+.fa-youtube-square:hover {
+	color:red;
+	transition:.3s;
+}
+
+.fa-reddit-square:hover {
+	color:#5bc0de;
+	transition:.3s;
+}
+
+.fa-stack-overflow:hover {
+	color:orange;
+	transition:.3s;
+}
+
+button {
+	font-family: 'Averia Serif Libre', cursive;
+	color:#403E2F
+}
+
+label {
+	font-family: 'Averia Serif Libre', cursive;
+	color:#403E2F
+
+}
+
+input {
+	font-family: 'Averia Serif Libre', cursive;
+}
+
+.dataTables_info, .dataTables_paginate {
 	font-family: 'Averia Serif Libre', cursive;
 }

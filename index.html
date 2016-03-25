@@ -13,8 +13,10 @@
 	<!-- sortable table -->
 	<!-- <script src="assets/javascript/sorttable.js"></script> -->
 
-	<!-- Original CSS -->
-	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<!-- Font Awesome Link -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+
 	<!-- moment.js -->
 	<script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
 	<!-- Google Fonts -->
@@ -31,33 +33,62 @@
 	<!-- New CSS -->
 	<!-- <link rel="stylesheet" type="text/css" href="assets/css/css.css"> -->
 
+	<!-- CSS Test Fonts -->
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:700' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Lora:400italic,700italic' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Fauna+One' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Playfair+Display' rel='stylesheet' type='text/css'>
+
+	<!-- Original CSS -->
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+
 </head>
 
 <body>
 
+    <!-- Jumbotron Header -->
+    <div class="jumbotron">
+      <div class="container">
+        <h1>Community Code!</h1>
+        <p>Community Code is a website for aspiring web developers to share educational resources with one another. To get started browse our list of resources below or feel free to add information of your own!</p>
+        <!-- <p><a class="btn btn-primary btn-lg" href="#start" role="button">Get Started! &raquo;</a></p> -->
+      </div>
+    </div>
+
 <div class="container">
 
-<div class="row">
+<!-- <div class="row">
 	<div class="col col-md-12 text-center">
 		<h1>Community Code!</h1>
-		<h3>Search for a Function/Method</h3>
-		<form class="form-inline">
-			<input type="text" id="searchterm" class="form-control">
-			<button class="btn btn-primary" type="button" id="submitbutton">Search</button>
-		</form>
 	</div>
-</div>
+</div> -->
 
 <div class="row text-center">
 	<div class="col-md-12" id="buttonArea">
-		<h3>Add a function/method!</h3>
-		<input placeholder="Function Name" id="nameBox">
-		<input placeholder="Language" id="languageBox">
-		<input placeholder="Sample Syntax" id="syntaxBox">
-		<input placeholder="Description" id="descriptionBox">
-		<button id="functionButton">Add Function/Method!</button>
+		<h3 id="start">Add a Function or Method!</h3>
+		<br>
+		<form class="form-inline">
+  			<div class="form-group">
+				<input placeholder="Function Name" id="nameBox" class="form-control">
+			</div>
+			<div class="form-group">
+				<input placeholder="Language" id="languageBox" class="form-control">
+			</div>
+			<div class="form-group">
+				<input placeholder="Sample Syntax" id="syntaxBox" class="form-control">
+			</div>
+			<div class="form-group">
+				<input placeholder="Description" id="descriptionBox" class="form-control">
+			</div>
+			<div class="form-group">
+				<button id="functionButton" class="btn btn-info">Submit</button>
+			</div>
 	</div>
 </div>
+
+<br>
+<br>
+<br>
 
 <div class="row">
 	<div class="col col-md-12 text-center" id="videoDiv"></div>
@@ -95,7 +126,7 @@
         <button type="button" class="close stopvideo" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">Additional Resources</h4>
       </div>
-      <div class="modal-body text-center" id="modalbody">
+      <div class="modal-body" id="modalbody">
 		<!-- Content Will Go Here -->
       </div>
       <div class="modal-footer">
@@ -104,6 +135,12 @@
     </div>
   </div>
 </div>
+
+<hr>
+
+<footer>
+<p>&copy; 2016 Team Alpha Dogs</p>
+</footer>
 
 </div>
 
